@@ -5,7 +5,7 @@ organization := "com.backstopsolutions"
 
 name := "swagger-codegen"
 
-version := "2.0.11"
+version := "2.0.11.a"
 
 scalaVersion := "2.10.3"
 
