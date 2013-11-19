@@ -1,13 +1,13 @@
 import xml.Group
 import AssemblyKeys._
 
-organization := "com.wordnik"
+organization := "com.backstopsolutions"
 
 name := "swagger-codegen"
 
 version := "2.0.11"
 
-scalaVersion := "2.9.1"
+scalaVersion := "2.10.3"
 
 javacOptions ++= Seq("-target", "1.6", "-source", "1.6", "-Xlint:unchecked", "-Xlint:deprecation")
 
@@ -48,18 +48,9 @@ packageOptions <+= (name, version, organization) map {
     )
 }
 
-publishTo <<= (version) { version: String =>
-  if (version.trim.endsWith("SNAPSHOT"))
-    Some("Sonatype Nexus Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
-  else
-    Some("Sonatype Nexus Releases" at "https://oss.sonatype.org/service/local/staging/deploy/maven2")
-}
+publishTo := Some(Resolver.ssh("ivy.backstopsolutions", "bunsen", "/var/www/html/ivy") as("hudson", new File(sys.env("HOME") + "/.ssh/id_dsa")) withPermissions "0644")
 
-
-//publishTo := Some(Resolver.file("file",  new File(Path.userHome.absolutePath+"/.m2/repository")))
-
-
-publishMavenStyle := true
+publishMavenStyle := false
 
 publishArtifact in Test := false
 
